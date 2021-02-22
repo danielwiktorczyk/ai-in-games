@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -345,21 +346,24 @@ public class NPCCharacterController : MonoBehaviour, AIBody
                 break;
         }
 
-        switch (OrientationBehaviourSelection)
+        if (SteeringBehaviourSelection != SteeringBehaviourSelection.SteeringWander)
         {
-            case OrientationBehaviourSelection.None:
-                break;
-            case OrientationBehaviourSelection.SteeringAlign:
-                SteeringOutput.Angular = SteeringAlign.GetSteering(Target.transform.rotation.eulerAngles.y).Angular;
-                break;
-            case OrientationBehaviourSelection.SteeringFace:
-                if (SteeringBehaviourSelection != SteeringBehaviourSelection.SteeringWander)
+            switch (OrientationBehaviourSelection)
+            {
+                case OrientationBehaviourSelection.None:
+                    break;
+                case OrientationBehaviourSelection.SteeringAlign:
+                    SteeringOutput.Angular = SteeringAlign.GetSteering(Target.transform.rotation.eulerAngles.y).Angular;
+                    break;
+                case OrientationBehaviourSelection.SteeringFace:
                     SteeringOutput.Angular = SteeringFace.GetSteering(Target.transform.position).Angular;
-                break;
-            case OrientationBehaviourSelection.SteeringLookWhereYoureGoing:
-                SteeringOutput.Angular = SteeringLookWhereYoureGoing.GetSteering().Angular;
-                break;
-        };
+                    break;
+                case OrientationBehaviourSelection.SteeringLookWhereYoureGoing:
+                    SteeringOutput.Angular = SteeringLookWhereYoureGoing.GetSteering().Angular;
+                    break;
+            };
+        }
+
 
         UpdateSteeringKinematics();
     }
@@ -379,33 +383,24 @@ public class NPCCharacterController : MonoBehaviour, AIBody
         transform.position += CurrentVelocity * Time.deltaTime;
         Debug.DrawLine(transform.position, transform.position + CurrentVelocity);
 
-        // Update orientation
-        float newRotationAngle = Mathf.Lerp(
-            AngleMapper.MapDegreesMidpointZero(transform.rotation.eulerAngles.y),
-            KinematicSteeringOutput.Rotation,
-            1f * Time.deltaTime
-        );
-
-        CurrentAngularVelocity = Vector3.zero; // We want to force our rotations
-        transform.rotation = Quaternion.AngleAxis(newRotationAngle, Vector3.up);
-
         // Update velocity
         CurrentVelocity = KinematicSteeringOutput.Velocity;
-
-        // We do not update Angular velocity for KinematicMovement 
+        CurrentAngularVelocity = Vector3.zero; // We do not update Angular velocity for KinematicMovement 
     }
 
     private void UpdateSteeringKinematics()
     {
         // Update position and orientation
         transform.position += CurrentVelocity * Time.deltaTime;
-        float newRotationAngle = transform.rotation.eulerAngles.y + CurrentAngularVelocity.y * Time.deltaTime;
-        transform.rotation = Quaternion.Euler(0, newRotationAngle, 0);
+        transform.Rotate(new Vector3(0, (180f / Mathf.PI) * CurrentAngularVelocity.y * Time.deltaTime, 0));
 
         // Update velocity and angular velocity
         CurrentVelocity += SteeringOutput.Linear * Time.deltaTime;
-        CurrentAngularVelocity += SteeringOutput.Angular * Time.deltaTime * Vector3.up;
+        CurrentAngularVelocity += SteeringOutput.Angular * Vector3.up * Time.deltaTime;
 
         ClipMaxVelocities();
+
+        //Debug.Log($"{transform.name} {CurrentVelocity.magnitude}");
+        Debug.Log($"{transform.name} {CurrentAngularVelocity.magnitude} time {Time.deltaTime}");
     }
 }

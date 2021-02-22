@@ -75,11 +75,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KinematicModeEnabled: 0
   HumanHeuristicsModeEnabled: 0
-  Target: {fileID: 0}
+  CurrentVelocity: {x: 0, y: 0, z: 0}
+  CurrentAngularVelocity: {x: 0, y: 0, z: 0}
   MaxSpeed: 10
-  MaxAcceleration: 20
-  MaxAngularSpeed: 5
-  MaxAngularAcceleration: 90
+  MaxAcceleration: 10
+  MaxAngularSpeed: 45
+  MaxAngularAcceleration: 180
+  Collider: {fileID: 0}
   SteppingRadius: 1
   SteppingSpeed: 1
   MaximumPerceptionZoneAngle: 120
@@ -112,13 +114,11 @@ MonoBehaviour:
   FlagRoleMaterial: {fileID: 2100000, guid: a039c37132d526641b1877f7baf8e0a3, type: 2}
   NormalMaterial: {fileID: 2100000, guid: fbfc79741b8637a449381028d35f156f, type: 2}
   IsCarryingFlag: 0
-  TargetFlag: {fileID: 0}
   HomeFlag: {fileID: 0}
   ClosestEnemyInRange: {fileID: 0}
   ClosestFrozenAllyInRange: {fileID: 0}
   IsEnemyInRange: 0
   EnemyRangeRadius: 20
-  IsFrozenInJail: 0
 --- !u!114 &7793727674493002571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   TimeToTarget: 0.1
   WanderOffest: 5
   WanderRadius: 2
-  WanderRate: 50
+  WanderRate: 10
 --- !u!114 &7370695304829379267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +222,7 @@ MonoBehaviour:
   MaxRotation: 3
   TargetRadius: 1
   SlowRadius: 90
-  TimeToTarget: 0.8
+  TimeToTarget: 0.1
 --- !u!114 &2169642855221911305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   MaxRotation: 3
   TargetRadius: 1
   SlowRadius: 90
-  TimeToTarget: 0.8
+  TimeToTarget: 0.1
 --- !u!114 &2590723433417915132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c0de7a4657b964b96afa11d7698612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxRotationSpeed: 3000
+  MaxRotationSpeed: 25
 --- !u!114 &1654264932322782543
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,11 +15,15 @@ public class KinematicWander : MonoBehaviour, IKinematicMovement
 
     public KinematicSteeringOutput GetSteering()
     {
-        return new KinematicSteeringOutput
+        KinematicSteeringOutput output = new KinematicSteeringOutput
         {
             Velocity = Character.MaxSpeed * transform.forward, // Get velocity from the vector form of the orientation.
             Rotation = RandomBinomial() * MaxRotationSpeed // Change our orientation randomly.
         };
+
+        transform.Rotate(new Vector3(0, (180f / Mathf.PI) * output.Rotation * Time.deltaTime, 0));
+
+        return output;
     }
 
     private static float RandomBinomial() => Random.value - Random.value;

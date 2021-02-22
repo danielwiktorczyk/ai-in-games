@@ -232,7 +232,8 @@ public class CTFCharacterController : NPCCharacterController
                 break;
         }
 
-        if (ClosestFrozenAllyInRange != null)
+        if (ClosestFrozenAllyInRange != null 
+            && ClosestEnemyInRange == null) // We don't want to rescue if there's an enemy in range
         {
             CurrentAction = CTFActions.RescueTeamate;
             RescueTeamateUpdate();
