@@ -46,17 +46,17 @@ public class CTFCharacterController : NPCCharacterController
     public bool IsEnemyInRange;
     public float EnemyRangeRadius;
 
-    public bool IsFrozenInJail;
-
     override public void Update()
     {
+        DetectCollision();
+
         CalculateClosestEnemy();
         CalculateClosestFrozenAlly();
         CalculateCurrentBase();
 
         DetermineActionUpdate();
 
-        if (!IsFrozenInJail)
+        if (CurrentAction != CTFActions.Frozen)
             base.Update();
     }
 
@@ -111,7 +111,7 @@ public class CTFCharacterController : NPCCharacterController
     private void CalculateClosestEnemy()
     {
         Vector3 closestEnemyDistance;
-        if (ClosestEnemyInRange == null || ClosestEnemyInRange.IsFrozenInJail)
+        if (ClosestEnemyInRange == null || ClosestEnemyInRange.CurrentAction == CTFActions.Frozen)
         {
             ClosestEnemyInRange = null;
             closestEnemyDistance = new Vector3();
@@ -136,7 +136,7 @@ public class CTFCharacterController : NPCCharacterController
             if (cTFCharacterController.Team == Team)
                 continue;
 
-            if (cTFCharacterController.IsFrozenInJail)
+            if (cTFCharacterController.CurrentAction == CTFActions.Frozen)
                 continue;
 
             if (ClosestEnemyInRange == null)
@@ -177,6 +177,9 @@ public class CTFCharacterController : NPCCharacterController
 
     private void IdleUpdate()
     {
+        if (CurrentAction != CTFActions.Idle)
+            return;
+        
         if (ClosestEnemyInRange != null)
         {
             if (CurrentBase == ClosestEnemyInRange.Team)
@@ -244,7 +247,7 @@ public class CTFCharacterController : NPCCharacterController
     private void CalculateClosestFrozenAlly()
     {
         Vector3 closestAllyDistance;
-        if (ClosestFrozenAllyInRange == null || !ClosestFrozenAllyInRange.IsFrozenInJail)
+        if (ClosestFrozenAllyInRange == null || ClosestFrozenAllyInRange.CurrentAction != CTFActions.Frozen)
         {
             ClosestFrozenAllyInRange = null;
             closestAllyDistance = Vector3.zero;
@@ -269,7 +272,7 @@ public class CTFCharacterController : NPCCharacterController
             if (cTFCharacterController.Team != Team)
                 continue;
 
-            if (!cTFCharacterController.IsFrozenInJail)
+            if (cTFCharacterController.CurrentAction != CTFActions.Frozen)
                 continue;
 
             if (ClosestFrozenAllyInRange == null)
@@ -446,6 +449,7 @@ public class CTFCharacterController : NPCCharacterController
 
     private void FrozenUpdate()
     {
+        Debug.Log($"{transform.name} Frozen update");
         SteeringBehaviourSelection = SteeringBehaviourSelection.Idle;
         KinematicBehaviourSelection = KinematicBehaviourSelection.Idle;
         OrientationBehaviourSelection = OrientationBehaviourSelection.None;
@@ -455,13 +459,21 @@ public class CTFCharacterController : NPCCharacterController
         CurrentAngularVelocity = Vector3.zero;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void DetectCollision()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, Collider.bounds.extents.x); // use layer mask
+
+        foreach (var collider in colliders)
+            HandleCollision(collider);
+    }
+
+    private void HandleCollision(Collider other)
     {
         switch (CurrentAction)
         {
             case CTFActions.RescueTeamate:
                 CTFCharacterController ally = other.GetComponent<CTFCharacterController>();
-                if (ally == null || ally.Team != Team || !ally.IsFrozenInJail)
+                if (ally == null || ally.Team != Team || ally.CurrentAction != CTFActions.Frozen)
                     return;
                 ally.Rescue();
                 CurrentAction = CTFActions.Idle;
@@ -470,7 +482,7 @@ public class CTFCharacterController : NPCCharacterController
                 if (CurrentBase != Team)
                     return;
                 CTFCharacterController enemy = other.GetComponent<CTFCharacterController>();
-                if (enemy == null || enemy.Team == Team)
+                if (enemy == null || enemy.Team == Team || enemy.CurrentAction == CTFActions.Frozen)
                     return;
                 enemy.Jail();
                 CurrentAction = CTFActions.Idle;
@@ -481,7 +493,10 @@ public class CTFCharacterController : NPCCharacterController
 
         // even if we aren't rescuing, let's unfreeze any allies we cross
         CTFCharacterController frozenAlly = other.GetComponent<CTFCharacterController>();
-        if (frozenAlly != null && frozenAlly.Team == Team && frozenAlly.IsFrozenInJail)
+        if (frozenAlly != null 
+            && frozenAlly.Team == Team 
+            && frozenAlly.CurrentAction == CTFActions.Frozen
+            && frozenAlly != this)
             frozenAlly.Rescue();
     }
 
@@ -502,7 +517,6 @@ public class CTFCharacterController : NPCCharacterController
 
         IsFlagChaser = false;
         IsCarryingFlag = false;
-        IsFrozenInJail = true;
 
         CurrentAction = CTFActions.Frozen;
 
@@ -513,9 +527,8 @@ public class CTFCharacterController : NPCCharacterController
     public void Rescue()
     {
         IsCarryingFlag = false;
-        IsFrozenInJail = false;
 
-        CurrentAction = CTFActions.Idle ;
+        CurrentAction = CTFActions.Idle;
     }
 
 }

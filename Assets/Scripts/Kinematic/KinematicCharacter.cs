@@ -22,11 +22,17 @@ public class KinematicCharacter : MonoBehaviour, AIBody
     public Vector3 CurrentVelocity;
     public Vector3 CurrentAngularVelocity;
     public float MaxSpeed;
+    private Collider Collider;
 
     [SerializeField] private KinematicWander KinematicWander;
     [SerializeField] private KinematicSeek KinematicSeek;
     [SerializeField] private KinematicFlee KinematicFlee;
     [SerializeField] private KinematicArrive KinematicArrive;
+
+    public void Awake()
+    {
+        Collider = GetComponent<Collider>();
+    }
 
     AIBody AIBody.Target { get => Target; }
     Vector3 AIBody.CurrentVelocity { get => CurrentVelocity; }
@@ -35,6 +41,8 @@ public class KinematicCharacter : MonoBehaviour, AIBody
     float AIBody.MaxAcceleration { get => 0; }
     float AIBody.MaxAngularSpeed { get => 0; }
     float AIBody.MaxAngularAcceleration { get => 0; }
+    Collider AIBody.Collider => Collider;
+
 
     Transform AIBody.transform => transform;
 

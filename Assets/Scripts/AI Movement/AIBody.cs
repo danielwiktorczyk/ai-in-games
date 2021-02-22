@@ -12,4 +12,5 @@ public interface AIBody
     public float MaxAngularSpeed { get; }
     public float MaxAngularAcceleration { get; }
     public Transform transform { get; }
+    public Collider Collider { get; }
 }

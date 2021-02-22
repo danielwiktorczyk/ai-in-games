@@ -23,6 +23,7 @@ public class NPCCharacterController : MonoBehaviour, AIBody
     public float MaxAcceleration;
     public float MaxAngularSpeed;
     public float MaxAngularAcceleration;
+    public Collider Collider;
 
     [SerializeField] protected float SteppingRadius;
     [SerializeField] protected float SteppingSpeed;
@@ -57,6 +58,10 @@ public class NPCCharacterController : MonoBehaviour, AIBody
     // Human Movement
     public HumanHeuristicMode HumanHeuristicMode;
 
+    public void Awake()
+    {
+        Collider = GetComponent<Collider>();
+    }
 
     AIBody AIBody.Target { get => Target; }
     Vector3 AIBody.CurrentVelocity { get => CurrentVelocity; }
@@ -66,6 +71,8 @@ public class NPCCharacterController : MonoBehaviour, AIBody
     float AIBody.MaxAngularSpeed { get => MaxAngularSpeed; }
     float AIBody.MaxAngularAcceleration { get => MaxAngularAcceleration; }
     Transform AIBody.transform => transform;
+    Collider AIBody.Collider => Collider;
+
 
     // Update is called once per frame
     virtual public void Update()
@@ -373,7 +380,6 @@ public class NPCCharacterController : MonoBehaviour, AIBody
         Debug.DrawLine(transform.position, transform.position + CurrentVelocity);
 
         // Update orientation
-        //float newRotationAngle = transform.rotation.eulerAngles.y + (KinematicSteeringOutput.Rotation * Time.deltaTime);
         float newRotationAngle = Mathf.Lerp(
             AngleMapper.MapDegreesMidpointZero(transform.rotation.eulerAngles.y),
             KinematicSteeringOutput.Rotation,
@@ -392,8 +398,9 @@ public class NPCCharacterController : MonoBehaviour, AIBody
     private void UpdateSteeringKinematics()
     {
         // Update position and orientation
-        // TODO
         transform.position += CurrentVelocity * Time.deltaTime;
+        float newRotationAngle = transform.rotation.eulerAngles.y + CurrentAngularVelocity.y * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(0, newRotationAngle, 0);
 
         // Update velocity and angular velocity
         CurrentVelocity += SteeringOutput.Linear * Time.deltaTime;

@@ -6,7 +6,14 @@ using UnityEngine;
 public class Flag : MonoBehaviour, AIBody
 {
     public Teams Team;
-    Vector3 SpawnPosition;
+    private Vector3 SpawnPosition;
+    private Collider Collider;
+
+    private void Awake()
+    {
+        SpawnPosition = transform.position;
+        Collider = GetComponent<Collider>();
+    }
 
     public AIBody Target => null;
     public Vector3 CurrentVelocity => Vector3.zero;
@@ -15,11 +22,7 @@ public class Flag : MonoBehaviour, AIBody
     public float MaxAcceleration => 0;
     public float MaxAngularSpeed => 0;
     public float MaxAngularAcceleration => 0;
-
-    private void Awake()
-    {
-        SpawnPosition = transform.position;
-    }
+    Collider AIBody.Collider => Collider;
 
     internal void ResetPosition()
     {

@@ -36,6 +36,7 @@ public class SteeringCharacter : MonoBehaviour, AIBody
     public float MaxAngularSpeed;
     public float MaxAngularAcceleration;
     public AIBody Target;
+    private Collider Collider;
 
     [SerializeField] private SteeringWander SteeringWander;
     [SerializeField] private SteeringSeek SteeringSeek;
@@ -47,6 +48,11 @@ public class SteeringCharacter : MonoBehaviour, AIBody
     [SerializeField] private SteeringLookWhereYoureGoing SteeringLookWhereYoureGoing;
     [SerializeField] private SteeringEvade SteeringEvade;
 
+    public void Awake()
+    {
+        Collider = GetComponent<Collider>();
+    }
+
     AIBody AIBody.Target { get => Target; }
     Vector3 AIBody.CurrentVelocity { get => CurrentVelocity; }
     Vector3 AIBody.CurrentAngularVelocity { get => CurrentAngularVelocity; }
@@ -54,6 +60,7 @@ public class SteeringCharacter : MonoBehaviour, AIBody
     float AIBody.MaxAcceleration { get => MaxAcceleration; }
     float AIBody.MaxAngularSpeed { get => MaxAngularSpeed; }
     float AIBody.MaxAngularAcceleration { get => MaxAngularAcceleration; }
+    Collider AIBody.Collider => Collider;
 
     Transform AIBody.transform => transform;
 

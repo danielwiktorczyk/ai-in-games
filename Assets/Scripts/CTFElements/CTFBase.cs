@@ -5,6 +5,12 @@ using UnityEngine;
 public class CTFBase : MonoBehaviour, AIBody
 {
     public Teams Team;
+    private Collider Collider;
+
+    private void Awake()
+    {
+        Collider = GetComponent<Collider>();
+    }
 
     public AIBody Target => null;
     public Vector3 CurrentVelocity => Vector3.zero;
@@ -13,4 +19,6 @@ public class CTFBase : MonoBehaviour, AIBody
     public float MaxAcceleration => 0;
     public float MaxAngularSpeed => 0;
     public float MaxAngularAcceleration => 0;
+    Collider AIBody.Collider => Collider;
+
 }
