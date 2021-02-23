@@ -84,7 +84,7 @@ MonoBehaviour:
   MaxAngularAcceleration: 180
   Collider: {fileID: 0}
   SteppingRadius: 2
-  SteppingSpeed: 1
+  SteppingSpeed: 3
   MaximumPerceptionZoneAngle: 120
   MinimumPerceptionZoneAngle: 20
   MaximumPerceptionZoneScale: 1

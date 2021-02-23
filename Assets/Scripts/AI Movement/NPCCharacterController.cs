@@ -296,6 +296,7 @@ public class NPCCharacterController : MonoBehaviour, AIBody
                 else
                 {
                     SteeringOutput = SteeringAlign.GetSteering(AngleMapper.MapDegreesMidpointZero(facingRotation + 180f));
+                    SteeringOutput.Linear = -1 * direction.normalized * MaxAcceleration;
                     UpdateSteeringKinematics();
                 }
             }
