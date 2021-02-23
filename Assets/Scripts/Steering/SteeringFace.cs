@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SteeringFace : SteeringAlign
 {
-    public SteeringOutput GetSteering(Vector3 targetPosition)
+    public SteeringOutput GetSteering(Vector3 targetPosition, bool faceaway = false)
     {
         // Calculate the target to delegate to align
 
@@ -18,6 +18,6 @@ public class SteeringFace : SteeringAlign
             return new SteeringOutput(); // TB says "return target..." 
 
         // Delegate to align
-        return base.GetSteering(Quaternion.LookRotation(direction, Vector3.up).eulerAngles.y);
+        return base.GetSteering(Quaternion.LookRotation((faceaway ? -1 : 1) * direction, Vector3.up).eulerAngles.y);
     }
 }

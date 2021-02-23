@@ -19,6 +19,7 @@ public enum OrientationBehaviourSelection
     None,
     SteeringAlign,
     SteeringFace,
+    SteeringFaceAway,
     SteeringLookWhereYoureGoing
 }
 

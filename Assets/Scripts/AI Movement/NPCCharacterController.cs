@@ -365,6 +365,9 @@ public class NPCCharacterController : MonoBehaviour, AIBody
                 case OrientationBehaviourSelection.SteeringFace:
                     SteeringOutput.Angular = SteeringFace.GetSteering(Target.transform.position).Angular;
                     break;
+                case OrientationBehaviourSelection.SteeringFaceAway:
+                    SteeringOutput.Angular = SteeringFace.GetSteering(Target.transform.position, true).Angular;
+                    break;
                 case OrientationBehaviourSelection.SteeringLookWhereYoureGoing:
                     SteeringOutput.Angular = SteeringLookWhereYoureGoing.GetSteering().Angular;
                     break;

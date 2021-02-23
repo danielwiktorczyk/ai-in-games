@@ -221,8 +221,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxRotation: 3
-  TargetRadius: 1
-  SlowRadius: 90
+  TargetRadius: 10
+  SlowRadius: 60
   TimeToTarget: 0.1
 --- !u!114 &2169642855221911305
 MonoBehaviour:

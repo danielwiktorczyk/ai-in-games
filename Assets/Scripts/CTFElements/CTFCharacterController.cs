@@ -444,7 +444,7 @@ public class CTFCharacterController : NPCCharacterController
 
         SteeringBehaviourSelection = SteeringBehaviourSelection.SteeringEvade;
         KinematicBehaviourSelection = KinematicBehaviourSelection.KinematicFlee;
-        OrientationBehaviourSelection = OrientationBehaviourSelection.SteeringLookWhereYoureGoing;
+        OrientationBehaviourSelection = OrientationBehaviourSelection.SteeringFaceAway;
         HumanHeuristicMode = HumanHeuristicMode.StayingAwayFromATarget;
     }
 

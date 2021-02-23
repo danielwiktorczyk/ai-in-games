@@ -315,12 +315,12 @@ PrefabInstance:
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
       propertyPath: KinematicModeEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
       propertyPath: HumanHeuristicsModeEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
@@ -508,12 +508,12 @@ PrefabInstance:
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
       propertyPath: KinematicModeEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
       propertyPath: HumanHeuristicsModeEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
@@ -523,6 +523,11 @@ PrefabInstance:
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
       propertyPath: KinematicBehaviourSelection
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
+        type: 3}
+      propertyPath: OrientationBehaviourSelection
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2586862665504219943, guid: ed078f1a3ca2f4f419d67e98f9753595,
@@ -612,12 +617,12 @@ PrefabInstance:
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
       propertyPath: KinematicModeEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
       propertyPath: HumanHeuristicsModeEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed078f1a3ca2f4f419d67e98f9753595, type: 3}
@@ -972,7 +977,7 @@ PrefabInstance:
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
       propertyPath: KinematicModeEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
@@ -982,7 +987,7 @@ PrefabInstance:
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}
       propertyPath: HumanHeuristicsModeEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 614868512382501070, guid: ed078f1a3ca2f4f419d67e98f9753595,
         type: 3}

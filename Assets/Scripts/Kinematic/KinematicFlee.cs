@@ -29,7 +29,7 @@ public class KinematicFlee : MonoBehaviour, IKinematicMovement
 
         //// Face in the direction we want to move. (The TB just straight up changes our direction here)
         //transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
-        float targetRotation = Quaternion.LookRotation(direction, Vector3.up).eulerAngles.y;
+        float targetRotation = Quaternion.LookRotation(-direction, Vector3.up).eulerAngles.y;
         output.Rotation = AngleMapper.MapDegreesMidpointZero(targetRotation);
 
         return output;
