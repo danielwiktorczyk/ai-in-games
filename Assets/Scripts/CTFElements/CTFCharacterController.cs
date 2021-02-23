@@ -450,7 +450,6 @@ public class CTFCharacterController : NPCCharacterController
 
     private void FrozenUpdate()
     {
-        Debug.Log($"{transform.name} Frozen update");
         SteeringBehaviourSelection = SteeringBehaviourSelection.Idle;
         KinematicBehaviourSelection = KinematicBehaviourSelection.Idle;
         OrientationBehaviourSelection = OrientationBehaviourSelection.None;

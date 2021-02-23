@@ -269,7 +269,7 @@ public class NPCCharacterController : MonoBehaviour, AIBody
                 Target.transform.position.x,
                 transform.position.y,
                 Target.transform.position.z);
-            transform.position += -2f * direction;
+            transform.position += -SteppingRadius * direction.normalized;
         }
         else
         {
