@@ -36,6 +36,9 @@ public class CTFCharacterController : NPCCharacterController
     public static bool RedFlagSeekerActive;
     public static bool BlueFlagSeekerActive;
     public static bool GreenFlagSeekerActive;
+    public static bool RedFlagSeekerActiveWithFlag;
+    public static bool BlueFlagSeekerActiveWithFlag;
+    public static bool GreenFlagSeekerActiveWithFlag;
 
     public bool IsCarryingFlag;
     public AIBody TargetFlag;
@@ -324,6 +327,21 @@ public class CTFCharacterController : NPCCharacterController
             TargetFlag.transform.position = transform.position;
             Target = HomeBase; // replace with closest point, needs architectural update :(
 
+            switch (Team)
+            {
+                case Teams.Red:
+                    RedFlagSeekerActiveWithFlag = true;
+                    break;
+                case Teams.Blue:
+                    BlueFlagSeekerActiveWithFlag = true;
+                    break;
+                case Teams.Green:
+                    GreenFlagSeekerActiveWithFlag = true;
+                    break;
+                case Teams.Neutral:
+                    break;
+            }
+
             float distanceFromGoal = (new Vector3(HomeBase.transform.position.x, transform.position.y, HomeBase.transform.position.z) - transform.position)
                 .magnitude;
             if (distanceFromGoal <= 1f)
@@ -335,6 +353,21 @@ public class CTFCharacterController : NPCCharacterController
             flags = flags.Where(flag => flag.GetComponent<Flag>().Team != Team).ToArray();
             TargetFlag = flags[0].GetComponent<AIBody>();
             Target = TargetFlag;
+
+            switch (Team)
+            {
+                case Teams.Red:
+                    RedFlagSeekerActiveWithFlag = false;
+                    break;
+                case Teams.Blue:
+                    BlueFlagSeekerActiveWithFlag = false;
+                    break;
+                case Teams.Green:
+                    GreenFlagSeekerActiveWithFlag = false;
+                    break;
+                case Teams.Neutral:
+                    break;
+            }
 
             Vector3 distanceFromFlag = transform.position - Target.transform.position;
             distanceFromFlag.y = 0;
