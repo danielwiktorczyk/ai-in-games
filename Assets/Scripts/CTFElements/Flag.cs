@@ -26,7 +26,7 @@ public class Flag : MonoBehaviour, AIBody
 
     internal void ResetPosition()
     {
-        transform.position = SpawnPosition;
+        transform.SetPositionAndRotation(SpawnPosition, transform.rotation);
     }
 
     public void SetTarget(GameObject target)

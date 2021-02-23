@@ -545,7 +545,7 @@ public class CTFCharacterController : NPCCharacterController
         if (IsCarryingFlag)
         {
             RemoveFlagChaserRole();
-            HomeFlag.GetComponent<Flag>().ResetPosition();
+            TargetFlag.transform.gameObject.GetComponent<Flag>().ResetPosition();
         }
 
         // If we want to send them back to Home base
