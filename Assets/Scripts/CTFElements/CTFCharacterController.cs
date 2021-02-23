@@ -341,7 +341,7 @@ public class CTFCharacterController : NPCCharacterController
         }
 
         SteeringBehaviourSelection = SteeringBehaviourSelection.SteeringArrive;
-        KinematicBehaviourSelection = KinematicBehaviourSelection.KinematicSeek;
+        KinematicBehaviourSelection = KinematicBehaviourSelection.KinematicArrive;
         OrientationBehaviourSelection = OrientationBehaviourSelection.SteeringFace;
         HumanHeuristicMode = HumanHeuristicMode.ReachingATarget;
     }
@@ -405,7 +405,7 @@ public class CTFCharacterController : NPCCharacterController
         Target = ClosestFrozenAllyInRange;
 
         SteeringBehaviourSelection = SteeringBehaviourSelection.SteeringArrive;
-        KinematicBehaviourSelection = KinematicBehaviourSelection.KinematicSeek;
+        KinematicBehaviourSelection = KinematicBehaviourSelection.KinematicArrive;
         OrientationBehaviourSelection = OrientationBehaviourSelection.SteeringFace;
         HumanHeuristicMode = HumanHeuristicMode.ReachingATarget;
     }
@@ -423,7 +423,7 @@ public class CTFCharacterController : NPCCharacterController
         Target = ClosestEnemyInRange;
 
         SteeringBehaviourSelection = SteeringBehaviourSelection.SteeringPersue;
-        KinematicBehaviourSelection = KinematicBehaviourSelection.KinematicSeek;
+        KinematicBehaviourSelection = KinematicBehaviourSelection.KinematicSeek; // TODO replace with Persue
         OrientationBehaviourSelection = OrientationBehaviourSelection.SteeringFace;
         HumanHeuristicMode = HumanHeuristicMode.ReachingATarget;
     }
