@@ -28,4 +28,9 @@ public class Flag : MonoBehaviour, AIBody
     {
         transform.position = SpawnPosition;
     }
+
+    public void SetTarget(GameObject target)
+    {
+        throw new NotImplementedException();
+    }
 }

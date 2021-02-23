@@ -20,7 +20,6 @@ public class KinematicWander : MonoBehaviour, IKinematicMovement
             Velocity = Character.MaxSpeed * transform.forward, // Get velocity from the vector form of the orientation.
             Rotation = Character.transform.rotation.eulerAngles.y + RandomBinomial() * MaxRotationSpeed // Change our orientation randomly.
         };
-        Debug.Log(output.Rotation);
 
         return output;
     }

@@ -18,8 +18,10 @@ public class NPCCharacterController : MonoBehaviour, AIBody
     [SerializeField] protected bool HumanHeuristicsModeEnabled;
 
     public AIBody Target;
+    public GameObject TargetGameObject;
     public Vector3 CurrentVelocity;
     public Vector3 CurrentAngularVelocity;
+    public float CurrentSpeed;
     public float MaxSpeed;
     public float MaxAcceleration;
     public float MaxAngularSpeed;
@@ -65,6 +67,8 @@ public class NPCCharacterController : MonoBehaviour, AIBody
     public void Awake()
     {
         Collider = GetComponent<Collider>();
+        if (TargetGameObject != null)
+            SetTarget(TargetGameObject);
     }
 
     AIBody AIBody.Target { get => Target; }
@@ -367,7 +371,6 @@ public class NPCCharacterController : MonoBehaviour, AIBody
             };
         }
 
-
         UpdateSteeringKinematics();
     }
 
@@ -408,6 +411,9 @@ public class NPCCharacterController : MonoBehaviour, AIBody
         // Update velocity
         CurrentVelocity = KinematicSteeringOutput.Velocity;
         CurrentAngularVelocity = Vector3.zero; // We do not update Angular velocity for KinematicMovement 
+        CurrentSpeed = CurrentVelocity.magnitude;
+
+        ClipMaxVelocities();
     }
 
     private void UpdateSteeringKinematics()
@@ -419,7 +425,17 @@ public class NPCCharacterController : MonoBehaviour, AIBody
         // Update velocity and angular velocity
         CurrentVelocity += SteeringOutput.Linear * Time.deltaTime;
         CurrentAngularVelocity += SteeringOutput.Angular * Vector3.up * Time.deltaTime;
+        CurrentSpeed = CurrentVelocity.magnitude;
 
         ClipMaxVelocities();
+    }
+
+    public void SetTarget(GameObject target)
+    {
+        TargetGameObject = target;
+        var targetAIBody = target.GetComponent<AIBody>();
+        if (targetAIBody == null)
+            Debug.LogWarning("SetTarget failed");
+        Target = targetAIBody;
     }
 }

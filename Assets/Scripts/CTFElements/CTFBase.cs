@@ -12,6 +12,11 @@ public class CTFBase : MonoBehaviour, AIBody
         Collider = GetComponent<Collider>();
     }
 
+    public void SetTarget(GameObject target)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public AIBody Target => null;
     public Vector3 CurrentVelocity => Vector3.zero;
     public Vector3 CurrentAngularVelocity => Vector3.zero;

@@ -75,8 +75,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KinematicModeEnabled: 0
   HumanHeuristicsModeEnabled: 0
+  TargetGameObject: {fileID: 0}
   CurrentVelocity: {x: 0, y: 0, z: 0}
   CurrentAngularVelocity: {x: 0, y: 0, z: 0}
+  CurrentSpeed: 0
   MaxSpeed: 10
   MaxAcceleration: 10
   MaxAngularSpeed: 45
@@ -302,9 +304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a14ff885999a04f8314b76559f2314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SatisfactionRadius: 5
+  SatisfactionRadius: 10
   InnerStoppingRadius: 1
-  TimeToTarget: 0.1
+  TimeToTarget: 0.8
 --- !u!136 &6188181103743630059
 CapsuleCollider:
   m_ObjectHideFlags: 0

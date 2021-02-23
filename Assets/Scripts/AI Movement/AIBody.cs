@@ -13,4 +13,5 @@ public interface AIBody
     public float MaxAngularAcceleration { get; }
     public Transform transform { get; }
     public Collider Collider { get; }
+    public void SetTarget(GameObject target);
 }
