@@ -35,7 +35,7 @@ public class SteeringWander : SteeringFace
 
         // Set linear acceleration to be at full
         output.Linear = Character.MaxAcceleration * Character.transform.forward;
-        Debug.Log($"{transform.name} wander output rotation angular {output.Angular}");
+        
         return output;
     }
 

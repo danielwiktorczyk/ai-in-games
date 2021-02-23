@@ -26,6 +26,9 @@ public class NPCCharacterController : MonoBehaviour, AIBody
     public float MaxAngularAcceleration;
     public Collider Collider;
 
+    private float TargetRotationDelta;
+    private float TargetRotationDeltaInterpolationT;
+
     [SerializeField] protected float SteppingRadius;
     [SerializeField] protected float SteppingSpeed;
     [SerializeField] protected float MaximumPerceptionZoneAngle;
@@ -380,8 +383,27 @@ public class NPCCharacterController : MonoBehaviour, AIBody
     private void UpdateKinematics()
     {
         // Update position
-        transform.position += CurrentVelocity * Time.deltaTime;
-        Debug.DrawLine(transform.position, transform.position + CurrentVelocity);
+        Vector3 newPosition = transform.position + CurrentVelocity * Time.deltaTime;
+        Debug.DrawLine(transform.position, transform.position + 5f * CurrentVelocity.normalized);
+        
+        // Update orientation
+        float targetRotation = AngleMapper.MapDegreesMidpointZero(KinematicSteeringOutput.Rotation);
+        float currentRotation = AngleMapper.MapDegreesMidpointZero(transform.rotation.eulerAngles.y);
+        float rotationDelta = targetRotation - currentRotation;
+        Quaternion newRotation;
+        if (KinematicBehaviourSelection == KinematicBehaviourSelection.KinematicWander)
+            newRotation = Quaternion.Euler(0, currentRotation + rotationDelta, 0);
+        else
+        {
+            if (TargetRotationDelta == rotationDelta)
+                TargetRotationDeltaInterpolationT += Time.deltaTime;
+            else
+                TargetRotationDeltaInterpolationT = Time.deltaTime;
+
+            float interpolatedRotationDelta = Mathf.Lerp(0, rotationDelta, 4 * TargetRotationDeltaInterpolationT);
+            newRotation = Quaternion.Euler(0, currentRotation + interpolatedRotationDelta, 0);
+        }
+        transform.SetPositionAndRotation(newPosition, newRotation);
 
         // Update velocity
         CurrentVelocity = KinematicSteeringOutput.Velocity;
@@ -399,8 +421,5 @@ public class NPCCharacterController : MonoBehaviour, AIBody
         CurrentAngularVelocity += SteeringOutput.Angular * Vector3.up * Time.deltaTime;
 
         ClipMaxVelocities();
-
-        //Debug.Log($"{transform.name} {CurrentVelocity.magnitude}");
-        Debug.Log($"{transform.name} {CurrentAngularVelocity.magnitude} time {Time.deltaTime}");
     }
 }

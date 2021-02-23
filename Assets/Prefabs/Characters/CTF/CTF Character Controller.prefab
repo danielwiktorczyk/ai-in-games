@@ -171,12 +171,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxRotation: 1
-  TargetRadius: 1
-  SlowRadius: 3
+  TargetRadius: 10
+  SlowRadius: 30
   TimeToTarget: 0.1
-  WanderOffest: 5
-  WanderRadius: 2
-  WanderRate: 10
+  WanderOffest: 10
+  WanderRadius: 5
+  WanderRate: 20
 --- !u!114 &7370695304829379267
 MonoBehaviour:
   m_ObjectHideFlags: 0

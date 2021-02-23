@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 109186121885647837}
   - component: {fileID: 614868512382501067}
   - component: {fileID: 614868512382501070}
-  - component: {fileID: 614868512382501061}
   - component: {fileID: 8238685232796307144}
   - component: {fileID: 3431900480731505418}
   - component: {fileID: 5116603975134055094}
@@ -75,13 +74,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KinematicModeEnabled: 0
   HumanHeuristicsModeEnabled: 0
-  Target: {fileID: 0}
-  MaxSpeed: 5
-  MaxAcceleration: 1
-  MaxAngularSpeed: 30
-  MaxAngularAcceleration: 5
-  SteppingRadius: 2
+  CurrentVelocity: {x: 0, y: 0, z: 0}
+  CurrentAngularVelocity: {x: 0, y: 0, z: 0}
+  MaxSpeed: 10
+  MaxAcceleration: 10
+  MaxAngularSpeed: 45
+  MaxAngularAcceleration: 180
+  Collider: {fileID: 0}
+  SteppingRadius: 1
   SteppingSpeed: 1
+  MaximumPerceptionZoneAngle: 120
+  MinimumPerceptionZoneAngle: 20
+  MaximumPerceptionZoneScale: 1
+  MinimumPerceptionZoneSpeed: 5
   KinematicBehaviourSelection: 1
   KinematicWander: {fileID: 614868512382501069}
   KinematicSeek: {fileID: 614868512382501068}
@@ -99,22 +104,6 @@ MonoBehaviour:
   SteeringLookWhereYoureGoing: {fileID: 27386880667071114}
   SteeringEvade: {fileID: 4434158510220662655}
   HumanHeuristicMode: 0
---- !u!54 &614868512382501061
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614868512382501064}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0.1
-  m_AngularDrag: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 84
-  m_CollisionDetection: 0
 --- !u!114 &8238685232796307144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,13 +155,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd1751b1c85b4042af84bfd88a37ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxRotation: 15
-  TargetRadius: 1
-  SlowRadius: 3
+  MaxRotation: 1
+  TargetRadius: 10
+  SlowRadius: 30
   TimeToTarget: 0.1
-  WanderOffest: 5
-  WanderRadius: 2
-  WanderRate: 50
+  WanderOffest: 10
+  WanderRadius: 5
+  WanderRate: 20
 --- !u!114 &8661735744423022400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c0de7a4657b964b96afa11d7698612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxRotationSpeed: 1000
+  MaxRotationSpeed: 25
 --- !u!114 &614868512382501068
 MonoBehaviour:
   m_ObjectHideFlags: 0
