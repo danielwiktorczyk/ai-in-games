@@ -46,6 +46,8 @@ public class CTFCharacterController : NPCCharacterController
     public bool IsEnemyInRange;
     public float EnemyRangeRadius;
 
+    public static Teams WinningTeam;
+
     override public void Update()
     {
         DetectCollision();
@@ -63,6 +65,7 @@ public class CTFCharacterController : NPCCharacterController
     public void Start()
     {
         RandomizeTransformInHomeBase();
+        WinningTeam = Teams.Neutral;
     }
 
     private void RandomizeTransformInHomeBase()
@@ -348,8 +351,12 @@ public class CTFCharacterController : NPCCharacterController
 
     private void FlagBroughtHome()
     {
-        Debug.Log("Team " + Team + " wins, for bringing the flag back home first!");
-
+        if (WinningTeam == Teams.Neutral)
+        {
+            Debug.Log("Team " + Team + " wins, for bringing the flag back home first!");
+            WinningTeam = Team;
+        }
+ 
         RemoveFlagChaserRole();
 
         // let's make sure there are no more goal seekers
