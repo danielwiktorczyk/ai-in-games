@@ -85,8 +85,8 @@ MonoBehaviour:
   Collider: {fileID: 0}
   SteppingRadius: 1
   SteppingSpeed: 1
-  MaximumPerceptionZoneAngle: 120
-  MinimumPerceptionZoneAngle: 20
+  MaximumPerceptionZoneAngle: 180
+  MinimumPerceptionZoneAngle: 60
   MaximumPerceptionZoneScale: 1
   MinimumPerceptionZoneSpeed: 5
   KinematicBehaviourSelection: 0
