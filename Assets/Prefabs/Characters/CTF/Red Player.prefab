@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 447367859808388462, guid: bbc95808475bb2840af1ce6c54a8c9bc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2ed1d7d8ac40b249a6332ef5acf6066, type: 2}
     - target: {fileID: 1654264932322782536, guid: bbc95808475bb2840af1ce6c54a8c9bc,
         type: 3}
       propertyPath: Arena
@@ -93,6 +98,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: e2ed1d7d8ac40b249a6332ef5acf6066, type: 2}
     - target: {fileID: 5650876213963859392, guid: bbc95808475bb2840af1ce6c54a8c9bc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2ed1d7d8ac40b249a6332ef5acf6066, type: 2}
+    - target: {fileID: 8486360857172766218, guid: bbc95808475bb2840af1ce6c54a8c9bc,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

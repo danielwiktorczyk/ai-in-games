@@ -438,6 +438,16 @@ PrefabInstance:
       propertyPath: HomeFlag
       value: 
       objectReference: {fileID: 1615431825}
+    - target: {fileID: 4564919523061287044, guid: b7a13e6618a4f294ea572d6ec2b4a122,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2ed1d7d8ac40b249a6332ef5acf6066, type: 2}
+    - target: {fileID: 5523973428191814624, guid: b7a13e6618a4f294ea572d6ec2b4a122,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2ed1d7d8ac40b249a6332ef5acf6066, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7a13e6618a4f294ea572d6ec2b4a122, type: 3}
 --- !u!4 &196302717 stripped
